@@ -15,6 +15,7 @@ public class Cliente {
     private String nombre;
     private String apellidom;
     private String apellidop;
+    private String foto;
     private Integer visitas;
     private Double saldo;
     private Double moras;
@@ -83,5 +84,13 @@ public class Cliente {
 
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
