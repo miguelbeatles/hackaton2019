@@ -15,6 +15,10 @@ public class DistanceMatrixResponse {
     private Rows[] rows;
     private String status;
 
+    public Rows[] getRows() {
+        return rows;
+    }
+
     @Override
     public String toString() {
         return "DistanceMatrixResponse{" +

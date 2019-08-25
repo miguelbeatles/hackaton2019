@@ -14,6 +14,8 @@ public class Gestores {
     private String apellidoM;
     private String apellidoP;
     private String foto;
+    private Double latitud;
+    private Double longitud;
 
     public String get_id() {
         return _id;
@@ -61,5 +63,21 @@ public class Gestores {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
 }

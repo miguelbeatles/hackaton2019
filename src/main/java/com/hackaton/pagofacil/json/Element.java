@@ -12,6 +12,10 @@ public class Element {
     private Item duration;
     private String status;
 
+    public Item getDistance() {
+        return distance;
+    }
+
     @Override
     public String toString() {
         return "{" +

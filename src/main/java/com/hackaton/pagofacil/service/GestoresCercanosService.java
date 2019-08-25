@@ -17,24 +17,32 @@ public class GestoresCercanosService {
     private final String origins="origins=";
     private final String destinations="destinations=";
     private final String key="key="+ Constants.API_KEY;
+    private final String COMA=",";
+    private final String PIPE="|";
 
     public final Logger logger = LoggerFactory.getLogger(GestoresCercanosService.class);
 
-    public List<Gestores> obtenerGestoresCercanos(){
-        List<Gestores> gestoresCercanos = new ArrayList<>();
+    public  boolean estaCerca(Gestores gestor,String latitud,String longitud){
+        boolean estaCerca=false;
         try{
-
+            String url = Constants.API_DISTANCE_MATRIX +"&"
+                    +origins+       latitud+          COMA+ longitud +"&"
+                    +destinations+gestor.getLatitud()+COMA+gestor.getLongitud()+"&"+
+                    key;
+            logger.info(url);
             RestTemplate restTemplate = new RestTemplate();
             DistanceMatrixResponse distance = restTemplate
-                    .getForObject(Constants.API_DISTANCE_MATRIX +"&"
-                            +origins+"&"
-                            +destinations+"&"+
-                            key,
+                    .getForObject(url,
                             DistanceMatrixResponse.class);
+            if(distance != null){
+                String distancia =  distance.getRows()[0].getElements()[0].getDistance().getValue();
+                if(Integer.parseInt(distancia) <= Constants.RADIO_COBERTURA)
+                    estaCerca=true;
+            }
         }catch (Exception e){
-            logger.info("Ocurrio un error buscando Gestores cercanos");
+            logger.info("Ocurrio un error buscando Gestores cercanos {}",e);
         }
 
-        return gestoresCercanos;
+        return estaCerca;
     }
 }

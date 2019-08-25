@@ -3,6 +3,7 @@ package com.hackaton.pagofacil.controllers;
 import com.hackaton.pagofacil.beans.Cliente;
 import com.hackaton.pagofacil.beans.Gestores;
 import com.hackaton.pagofacil.beans.HistorialGps;
+import com.hackaton.pagofacil.json.DistanceMatrixResponse;
 import com.hackaton.pagofacil.repositories.GestoresRepository;
 import com.hackaton.pagofacil.repositories.HistorialGpsRepository;
 import com.hackaton.pagofacil.service.GestoresCercanosService;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,6 +31,8 @@ public class GestoresController {
 
     @Autowired
     private HistorialGpsRepository repository;
+    @Autowired
+    private GestoresCercanosService gestoresCercanosService;
 
     @Autowired
     private GestoresRepository gestoresRepository;
@@ -53,16 +57,23 @@ public class GestoresController {
     }
 
 // http://10.0.15.119:8080/gestores/cercanos?latitud=126516256125&longitud=1223243
-    @GetMapping("/cercanos?latitud={latitud}&longitud={longitud}")
-    public Iterable<Gestores> infoCliente(@PathVariable("latitud") String latitud,@PathVariable("longitud") String longitud) {
-        Iterable<Gestores> gestoresCercanos;
+    //@GetMapping("/cercanos")
+    @RequestMapping(value = "/cercanos", method = RequestMethod.GET)
+    public List<Gestores> infoCliente(@RequestParam("latitud") String latitud,@RequestParam("longitud") String longitud) {
+        List<Gestores> gestoresCercanos = new ArrayList<>();
+        Iterable<Gestores> gestores = null;
+        logger.info("-----------------------------");
         try{
-            Iterable<Gestores> gestores = gestoresRepository.findAll();
-            gestores.forEach(gestor ->);
+            gestores = gestoresRepository.findAll();
+            gestores.forEach(gestor -> {
+                if(gestoresCercanosService.estaCerca(gestor,latitud,longitud)){
+                    gestoresCercanos.add(gestor);
+                }
+            });
         }catch (Exception e){
-            logger.info("Ocurrio un error al buscar los gestores");
+            logger.info("Ocurrio un error al buscar los gestores {}",e);
         }
-        return clienteRepository.findById(id);
+        return gestoresCercanos;
     }
 
 

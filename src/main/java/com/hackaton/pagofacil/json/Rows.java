@@ -11,6 +11,10 @@ import java.util.Arrays;
 public class Rows {
     private Element[] elements;
 
+    public Element[] getElements() {
+        return elements;
+    }
+
     @Override
     public String toString() {
         return "Rows{" +
