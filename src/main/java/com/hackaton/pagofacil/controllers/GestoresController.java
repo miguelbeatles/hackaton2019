@@ -1,9 +1,13 @@
 package com.hackaton.pagofacil.controllers;
 
+import com.hackaton.pagofacil.beans.Cliente;
 import com.hackaton.pagofacil.beans.Gestores;
 import com.hackaton.pagofacil.beans.HistorialGps;
 import com.hackaton.pagofacil.repositories.GestoresRepository;
 import com.hackaton.pagofacil.repositories.HistorialGpsRepository;
+import com.hackaton.pagofacil.service.GestoresCercanosService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/gestores")
 public class GestoresController {
+
+    public final Logger logger = LoggerFactory.getLogger(GestoresController.class);
 
     @Autowired
     private HistorialGpsRepository repository;
@@ -44,6 +50,19 @@ public class GestoresController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<HistorialGps> createGPS(@RequestBody HistorialGps historial){
         return new ResponseEntity<>(repository.save(historial), HttpStatus.CREATED);
+    }
+
+// http://10.0.15.119:8080/gestores/cercanos?latitud=126516256125&longitud=1223243
+    @GetMapping("/cercanos?latitud={latitud}&longitud={longitud}")
+    public Iterable<Gestores> infoCliente(@PathVariable("latitud") String latitud,@PathVariable("longitud") String longitud) {
+        Iterable<Gestores> gestoresCercanos;
+        try{
+            Iterable<Gestores> gestores = gestoresRepository.findAll();
+            gestores.forEach(gestor ->);
+        }catch (Exception e){
+            logger.info("Ocurrio un error al buscar los gestores");
+        }
+        return clienteRepository.findById(id);
     }
 
 
