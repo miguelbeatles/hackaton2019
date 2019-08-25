@@ -1,9 +1,9 @@
-package com.hackaton.pagofacil;
+package com.hackaton.pagofacil.beans;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.List;
 
 /**
  * Creado por  Ascari Q. Romo Pedraza - molder.itp@gmail.com on 2019-08-24.
@@ -20,6 +20,7 @@ public class Cliente {
     private Double saldo;
     private Double moras;
     private Domicilio domicilio;
+    private List<Pedidos> pedidos;
 
 
     public String get_id() {
@@ -31,27 +32,11 @@ public class Cliente {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre + " " + apellidom + " " + apellidop;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellidom() {
-        return apellidom;
-    }
-
-    public void setApellidom(String apellidom) {
-        this.apellidom = apellidom;
-    }
-
-    public String getApellidop() {
-        return apellidop;
-    }
-
-    public void setApellidop(String apellidop) {
-        this.apellidop = apellidop;
     }
 
     public Integer getVisitas() {
@@ -62,16 +47,20 @@ public class Cliente {
         this.visitas = visitas;
     }
 
-    public Double getSaldo() {
-        return saldo;
+    public String getSaldoDeudor(){
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        return format.format(saldo.doubleValue());
     }
 
     public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 
-    public Double getMoras() {
-        return moras;
+    public String getMoras() {
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        return format.format(moras);
     }
 
     public void setMoras(Double moras) {
@@ -92,5 +81,13 @@ public class Cliente {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public List<Pedidos> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedidos> pedidos) {
+        this.pedidos = pedidos;
     }
 }

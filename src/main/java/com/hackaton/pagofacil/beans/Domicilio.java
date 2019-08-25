@@ -1,4 +1,4 @@
-package com.hackaton.pagofacil;
+package com.hackaton.pagofacil.beans;
 
 /**
  * Creado por  Ascari Q. Romo Pedraza - molder.itp@gmail.com on 2019-08-24.

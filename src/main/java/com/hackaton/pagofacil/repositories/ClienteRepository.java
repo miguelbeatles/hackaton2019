@@ -1,6 +1,6 @@
 package com.hackaton.pagofacil.repositories;
 
-import com.hackaton.pagofacil.Cliente;
+import com.hackaton.pagofacil.beans.Cliente;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
