@@ -5,9 +5,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Creado por  Ascari Q. Romo Pedraza - molder.itp@gmail.com on 2019-08-24.
  */
 @Component
 public interface HistorialGpsRepository extends CrudRepository<HistorialGps, String> {
+    List<HistorialGps> findByNumeroEmpleado(String numeroEmpleado);
 }

@@ -31,7 +31,7 @@ public class Cliente {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre + " " + apellidom + " " + apellidop;
     }
 
     public void setNombre(String nombre) {

@@ -26,4 +26,12 @@ public class PuntoGps {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
 }
