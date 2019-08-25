@@ -1,11 +1,14 @@
 package com.hackaton.pagofacil.beans;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.util.List;
 
 /**
  * Creado por  Ascari Q. Romo Pedraza - molder.itp@gmail.com on 2019-08-24.
  */
+@Document(collection = "HistorialGPS")
 public class HistorialGps {
 
     private String _id;
