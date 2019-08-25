@@ -2,6 +2,8 @@ package com.hackaton.pagofacil.beans;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+
 /**
  * Creado por  Ascari Q. Romo Pedraza - molder.itp@gmail.com on 2019-08-24.
  */
@@ -14,8 +16,9 @@ public class Gestores {
     private String apellidoM;
     private String apellidoP;
     private String foto;
-    private Double latitud;
-    private Double longitud;
+    private BigDecimal latitud;
+    private BigDecimal longitud;
+    private Integer distancia;
 
     public String get_id() {
         return _id;
@@ -65,19 +68,42 @@ public class Gestores {
         this.foto = foto;
     }
 
-    public Double getLatitud() {
+    public BigDecimal getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(Double latitud) {
+    public void setLatitud(BigDecimal latitud) {
         this.latitud = latitud;
     }
 
-    public Double getLongitud() {
+    public BigDecimal getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(Double longitud) {
+    public void setLongitud(BigDecimal longitud) {
         this.longitud = longitud;
+    }
+
+    public Integer getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(Integer distancia) {
+        this.distancia = distancia;
+    }
+
+    @Override
+    public String toString() {
+        return "Gestores{" +
+                "_id='" + _id + '\'' +
+                ", numeroEmpleado='" + numeroEmpleado + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidoM='" + apellidoM + '\'' +
+                ", apellidoP='" + apellidoP + '\'' +
+                ", foto='" + foto + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", distancia=" + distancia +
+                '}';
     }
 }

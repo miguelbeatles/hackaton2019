@@ -1,9 +1,7 @@
 package com.hackaton.pagofacil.controllers;
 
-import com.hackaton.pagofacil.beans.Cliente;
 import com.hackaton.pagofacil.beans.Gestores;
 import com.hackaton.pagofacil.beans.HistorialGps;
-import com.hackaton.pagofacil.json.DistanceMatrixResponse;
 import com.hackaton.pagofacil.repositories.GestoresRepository;
 import com.hackaton.pagofacil.repositories.HistorialGpsRepository;
 import com.hackaton.pagofacil.service.GestoresCercanosService;
@@ -13,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Creado por  Ascari Q. Romo Pedraza - molder.itp@gmail.com on 2019-08-24.
@@ -53,24 +55,15 @@ public class GestoresController {
         return new ResponseEntity<>(repository.save(historial), HttpStatus.CREATED);
     }
 
-// http://10.0.15.119:8080/gestores/cercanos?latitud=126516256125&longitud=1223243
-    //@GetMapping("/cercanos")
-    @RequestMapping(value = "/cercanos", method = RequestMethod.GET)
-    public List<Gestores> infoCliente(@RequestParam("latitud") String latitud,@RequestParam("longitud") String longitud) {
-        List<Gestores> gestoresCercanos = new ArrayList<>();
-        Iterable<Gestores> gestores = null;
-        logger.info("-----------------------------");
-        try{
-            gestores = gestoresRepository.findAll();
-            gestores.forEach(gestor -> {
-                if(gestoresCercanosService.estaCerca(gestor,latitud,longitud)){
-                    gestoresCercanos.add(gestor);
-                }
-            });
-        }catch (Exception e){
-            logger.info("Ocurrio un error al buscar los gestores {}",e);
-        }
-        return gestoresCercanos;
+    @GetMapping("/cercanos")
+    public List<Gestores> infoCliente(@RequestParam("latitud") String latitud,
+                                      @RequestParam("longitud") String longitud) {
+
+        Stream<Gestores> stream = StreamSupport.stream(gestoresRepository.findAll().spliterator(), false);
+        return stream.filter(gestor -> gestoresCercanosService.estaCerca(gestor,latitud,longitud) != null)
+                .sorted(Comparator.comparingInt(Gestores::getDistancia))
+                .collect(Collectors.toList());
+
     }
 
 
