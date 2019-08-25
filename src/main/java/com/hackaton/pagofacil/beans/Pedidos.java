@@ -9,8 +9,8 @@ public class Pedidos {
 
     private Integer idPedido;
     private String descripcion;
-    private Integer saldo;
-    private Integer abonado;
+    private Double saldo;
+    private Double abonado;
 
     public Integer getIdPedido() {
         return idPedido;
@@ -28,23 +28,19 @@ public class Pedidos {
         this.descripcion = descripcion;
     }
 
-    public String getSaldo(){
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        format.setMaximumFractionDigits(0);
-        return format.format(saldo);
+    public Double getSaldo() {
+        return saldo;
     }
 
-    public void setSaldo(Integer saldo) {
+    public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 
-    public String getAbonado() {
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        format.setMaximumFractionDigits(0);
-        return format.format(abonado);
+    public Double getAbonado() {
+        return abonado;
     }
 
-    public void setAbonado(Integer abonado) {
+    public void setAbonado(Double abonado) {
         this.abonado = abonado;
     }
 }
