@@ -22,7 +22,6 @@ public class Cliente {
     private Domicilio domicilio;
     private List<Pedidos> pedidos;
 
-
     public String get_id() {
         return _id;
     }
@@ -32,11 +31,35 @@ public class Cliente {
     }
 
     public String getNombre() {
-        return nombre + " " + apellidom + " " + apellidop;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellidom() {
+        return apellidom;
+    }
+
+    public void setApellidom(String apellidom) {
+        this.apellidom = apellidom;
+    }
+
+    public String getApellidop() {
+        return apellidop;
+    }
+
+    public void setApellidop(String apellidop) {
+        this.apellidop = apellidop;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Integer getVisitas() {
@@ -47,20 +70,16 @@ public class Cliente {
         this.visitas = visitas;
     }
 
-    public String getSaldoDeudor(){
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        format.setMaximumFractionDigits(0);
-        return format.format(saldo.doubleValue());
+    public Double getSaldo() {
+        return saldo;
     }
 
     public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 
-    public String getMoras() {
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        format.setMaximumFractionDigits(0);
-        return format.format(moras);
+    public Double getMoras() {
+        return moras;
     }
 
     public void setMoras(Double moras) {
@@ -73,14 +92,6 @@ public class Cliente {
 
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public List<Pedidos> getPedidos() {
